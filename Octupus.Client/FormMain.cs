@@ -23,7 +23,7 @@ namespace Octupus.Client
             Client = new OctupusClient();
             Client.Connected += Client_Connected;
             Client.Disconnected += Client_Disconnected;
-            Client.ConnectAsync(new Target(Target.AnyIP, 58291));
+            Client.ConnectAsync(new Target("10.0.0.5", 58291));
         }
 
         void Client_Connected(object sender, ClientConnectionEventArgs e)
@@ -33,7 +33,7 @@ namespace Octupus.Client
 
         void Client_Disconnected(object sender, Tempest.ClientDisconnectedEventArgs e)
         {
-            Debug.WriteLine(String.Format("Octupus: Disconnected from {Requested={0}, Reason={1}, CustomReason={2}", e.Requested, e.Reason.ToString(), e.CustomReason));
+            Debug.WriteLine(String.Format("Octupus: Disconnected from (Requested={0}, Reason={1}, CustomReason={2})", e.Requested.ToString(), e.Reason.ToString(), e.CustomReason ?? "None"));
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
