@@ -1,6 +1,7 @@
 ﻿using Octupus.Common.Network;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,26 +31,31 @@ namespace Octupus.Client
 
         private void OnKeyUpMessage(MessageEventArgs<KeyUpMessage> e)
         {
+            Debug.WriteLine("Octupus: Received KeyUpMessage");
             Input.Keyboard.KeyUp((VirtualKeyCode)e.Message.KeyCode);
         }
 
         private void OnKeyDownMessage(MessageEventArgs<KeyDownMessage> e)
         {
+            Debug.WriteLine("Octupus: Received KeyDownMessage");
             Input.Keyboard.KeyDown((VirtualKeyCode)e.Message.KeyCode);
         }
 
         private void OnMouseWheelMessage(MessageEventArgs<MouseWheelMessage> e)
         {
+            Debug.WriteLine("Octupus: Received MouseWheelMessage");
             Input.Mouse.VerticalScroll(e.Message.ScrollAmount);
         }
 
         private void OnMouseMoveMessage(MessageEventArgs<MouseMoveMessage> e)
         {
+            Debug.WriteLine("Octupus: Received MouseMoveMessage");
             Input.Mouse.MoveMouseTo(e.Message.CursorLocation.X, e.Message.CursorLocation.Y);
         }
 
         private void OnMouseUpMessage(MessageEventArgs<MouseUpMessage> e)
         {
+            Debug.WriteLine("Octupus: Received MouseUpMessage");
             switch (e.Message.Button)
             {
                 case Common.MouseButton.Left:
@@ -66,6 +72,7 @@ namespace Octupus.Client
 
         private void OnMouseDownMessage(MessageEventArgs<MouseDownMessage> e)
         {
+            Debug.WriteLine("Octupus: Received MouseDownMessage");
             switch (e.Message.Button)
             {
                 case Common.MouseButton.Left:

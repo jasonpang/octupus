@@ -1,6 +1,7 @@
 ﻿using Octupus.Common.Network;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Octupus.Server
 
         protected override void OnConnectionMade(object sender, ConnectionMadeEventArgs e)
         {
+            Debug.WriteLine(String.Format("Octupus: Connected to {0}:{1}", e.Connection.RemoteTarget.Hostname, e.Connection.RemoteTarget.Port));
             lock (this.connections)
                 this.connections.Add(e.Connection);
 
@@ -26,6 +28,7 @@ namespace Octupus.Server
 
         protected override void OnConnectionDisconnected(object sender, DisconnectedEventArgs e)
         {
+            Debug.WriteLine(String.Format("Octupus: Disconnected from {0}:{1}", e.Connection.RemoteTarget.Hostname, e.Connection.RemoteTarget.Port));
             lock (this.connections)
                 this.connections.Remove(e.Connection);
 

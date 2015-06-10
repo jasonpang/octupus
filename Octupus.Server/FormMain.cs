@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -35,21 +36,25 @@ namespace Octupus.Server
         void Input_KeyUp(object sender, KeyEventArgs e)
         {
             BroadcastMessageIfEnabled(new KeyUpMessage() { KeyCode = (int)e.KeyCode });
+            Debug.WriteLine(String.Format("Octupus: Sent KeyUpMessage ({0}).", e.KeyCode.ToString()));
         }
 
         void Input_KeyDown(object sender, KeyEventArgs e)
         {
             BroadcastMessageIfEnabled(new KeyDownMessage() { KeyCode = (int)e.KeyCode });
+            Debug.WriteLine(String.Format("Octupus: Sent KeyDownMessage ({0}).", e.KeyCode.ToString()));
         }
 
         void Input_MouseWheel(object sender, MouseEventArgs e)
         {
             BroadcastMessageIfEnabled(new MouseWheelMessage() { ScrollAmount = e.Delta });
+            Debug.WriteLine(String.Format("Octupus: Sent MouseWheelMessage ({0}.", e.Delta));
         }
 
         void Input_MouseMoveExt(object sender, MouseEventExtArgs e)
         {
             BroadcastMessageIfEnabled(new MouseMoveMessage() { CursorLocation = e.Location });
+            Debug.WriteLine(String.Format("Octupus: Sent MouseMoveMessage ({0}, {1}).", e.X, e.Y));
         }
 
         void Input_MouseUpExt(object sender, MouseEventExtArgs e)
@@ -70,6 +75,7 @@ namespace Octupus.Server
                     return;
             }
             BroadcastMessageIfEnabled(new MouseUpMessage() { Button = mouseButton });
+            Debug.WriteLine(String.Format("Octupus: Sent MouseUpMessage (Button={0}).", mouseButton.ToString()));
         }
 
         void Input_MouseDownExt(object sender, MouseEventExtArgs e)
@@ -90,6 +96,7 @@ namespace Octupus.Server
                     return;
             }
             BroadcastMessageIfEnabled(new MouseDownMessage() { Button = mouseButton });
+            Debug.WriteLine(String.Format("Octupus: Sent MouseDownMessage (Button={0}).", mouseButton.ToString()));
         }
 
         private void BroadcastMessageIfEnabled(Message message)
