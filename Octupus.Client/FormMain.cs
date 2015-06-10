@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tempest;
 using WindowsInput;
 
 namespace Octupus.Client
@@ -20,6 +21,7 @@ namespace Octupus.Client
             InitializeComponent();
             Client = new OctupusClient();
             Client.Disconnected += Client_Disconnected;
+            Client.ConnectAsync(new Target(Target.AnyIP, 58291));
         }
 
         void Client_Disconnected(object sender, Tempest.ClientDisconnectedEventArgs e)
